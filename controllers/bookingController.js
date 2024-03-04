@@ -91,7 +91,7 @@ exports.addBooking = async (req, res, next) => {
         //add user Id to req.body
         req.body.user = req.user.id;
         const existedBookings = await Booking.find({
-            user: req.user.id
+            UserID: req.user.id
         });
 
         if(existedBookings.length >= 3 && req.user.role !== 'admin') {
