@@ -15,17 +15,17 @@ router.use('/:carId/bookings', bookingRouter);
 //createCar admin, provider
 router.route('/')
     .get(getCars)
-    .post(protect, authorize('admin'), createCar);
+    .post(protect, authorize('admin', ' provider'), createCar);
 
 
 // ANCHOR getCar updateCar and deleteCar
 //getCar : public
-//updateCar : admin, user
-//deleteCar : admin, user
+//updateCar : admin, provider
+//deleteCar : admin, provider
 router.route('/:id')
     .get(getCar)
-    .put(protect, authorize('admin'), updateCar)
-    .delete(protect, authorize('admin'), deleteCar);
+    .put(protect, authorize('admin', 'provider'), updateCar)
+    .delete(protect, authorize('admin', 'provider'), deleteCar);
 
 
 module.exports = router;

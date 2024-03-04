@@ -4,10 +4,10 @@ const router = express.Router({mergeParams: true});
 const {protect, authorize} = require('../middleware/authMiddleware');
 
 // ANCHOR getBookings and addBooking
-// getBookings : admin, user
+// getBookings : admin, user, provider
 // addBooking : admin, user
 router.route('/')
-    .get(protect, authorize('admin','user'), getBookings)
+    .get(protect, authorize('admin','user', 'provider'), getBookings)
     .post(protect, authorize('admin', 'user'), addBooking);
 
 
