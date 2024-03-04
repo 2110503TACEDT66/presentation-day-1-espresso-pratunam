@@ -41,12 +41,7 @@ ProviderSchema.virtual('Cars',{
   foreignField: 'ProviderID',
   justOne: false
 });
-ProviderSchema.virtual('Bookings',{
-  ref: 'Booking',
-  localField: '_id',
-  foreignField: 'ProviderID',
-  justOne: false
-});
+
 
 
 

@@ -33,11 +33,5 @@ const BookingSchema = new mongoose.Schema({
   toObject: {virtuals: true}
 });
 
-BookingSchema.virtual('Cars',{
-  ref: 'Car',
-  localField: 'CarID',
-  foreignField: '_id',
-  justOne: false
-});
 
 module.exports = mongoose.model('Booking', BookingSchema);
