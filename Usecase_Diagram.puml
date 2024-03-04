@@ -1,0 +1,50 @@
+@startuml
+
+!define ICONURL https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v2.1.0
+!include ICONURL/common.puml
+
+!define ActorUser(actorAlias, actorName) actor actorAlias << (C,{actorName}) >>
+!define ActorProvider(actorAlias, actorName) actor actorAlias << (P,{actorName}) >>
+!define ActorAdmin(actorAlias, actorName) actor actorAlias << (A,{actorName}) >>
+
+skinparam usecase {
+    BackgroundColor PaleGreen
+    BorderColor DarkGreen
+}
+
+rectangle "Car Rental System" {
+    left to right direction
+    User -- (GetAllCars) : Find Cars
+    User -- (GetCar) : Find a Car
+    User -- (GetBookings) : Get bookings
+    User -- (CreateBooking) : Book Car
+    User -- (UpdateBooking) : Update Booking
+    User -- (DeleteBooking) : Cancel Booking
+    User -- (GetAllProviders) : Find Providers
+    User -- (GetProvider) : Get a Provider
+
+    Admin -up- (GetAllBookings) : Get All Bookings
+    Admin -up- (CreateBooking) : Create Booking
+    Admin -up- (UpdateBooking) : Update Booking
+    Admin -up- (DeleteBooking) : Delete Booking
+    Admin -up- (GetAllCars) : Get All Cars
+    Admin -up- (GetCar) : Get a Car
+    Admin -up- (CreateCar) : Create Car
+    Admin -up- (UpdateCar) : Update Car
+    Admin -up- (DeleteCar) : Delete Car
+    Admin -up- (GetAllProviders) : Find Providers
+    Admin -up- (GetProvider) : Get a Provider
+
+    Provider -up- (GetCars) : Get Cars
+    Provider -up- (CreateCar) : Create Car
+    Provider -up- (UpdateCar) : Update Car
+    Provider -up- (DeleteCar) : Delete Car
+    Provider -up- (GetBookings) : Get bookings
+    Provider -up- (UpdateBooking) : Update Booking
+    Provider -up- (DeleteBooking) : Cancel Booking
+
+}
+
+
+
+@enduml
