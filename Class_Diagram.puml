@@ -1,0 +1,64 @@
+@startuml Car Rental System
+
+class User  {
+  -UserID: string PK
+  -Name: string
+  -Email: string
+  -Password: string
+  -Phone: string
+  -Role: string
+  +Register()
+  +Login()
+  +Logout()
+  +GetCars()
+  +GetCar()
+}
+
+class Car  {
+  -CarID: string PK
+  -Brand: string
+  -Model: string
+  -Year: number
+  -Type: string
+  -Color: string
+  -RegistrationNumber: string
+  -Available: boolean
+  -UserID: string FK
+  +GetCars()
+  +GetCar()
+  -CreateCar()
+  -UpdateCar()
+  -DeleteCar()
+
+}
+
+class Provider {
+  -ProviderID: string PK
+  -Name: string
+  -Email: string
+  -Address: string
+  -Phone: string
+  +getProviders()
+  +getProvider()
+  +ProviderRegister()
+  +ProviderLogin()
+}
+
+class Booking  {
+  -BookingID: string PK
+  -StartDate: timestamp
+  -EndDate: timestamp
+  -UserID: string FK
+  +SelectBooking()
+  +GetAllBookings()
+  +GetBookingbyCar()
+  -CreateBooking()
+  -UpdateBooking()
+  -DeleteBooking()
+}
+
+User "1" -- "1..*" Car: "owns"
+User "1" -- "1..*" Booking: "makes"
+Booking "1" -- "1..*" Car: "books"
+Booking "1" -- "1..*" Provider: "provides"
+@enduml
