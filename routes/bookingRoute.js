@@ -12,13 +12,13 @@ router.route('/')
 
 
 // ANCHOR getBooking, updateBooking and deleteBooking
-//getBooking : admin, user
-//updateBooking : admin, user
-//deleteBooking : admin, user
+//getBooking : admin, user, provider
+//updateBooking : admin, user, provider
+//deleteBooking : admin, user, provider
 router.route('/:id')
-    .get(protect, authorize('admin', 'user'), getBooking)
-    .put(protect, authorize('admin', 'user'), updateBooking)
-    .delete(protect, authorize('admin', 'user'), deleteBooking);
+    .get(protect, authorize('admin', 'user', 'provider'), getBooking)
+    .put(protect, authorize('admin', 'user', 'provider'), updateBooking)
+    .delete(protect, authorize('admin', 'user', 'provider'), deleteBooking);
 
 
 //export
