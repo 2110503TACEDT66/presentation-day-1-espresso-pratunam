@@ -16,7 +16,7 @@ exports.getBookings = async (req, res, next) => {
             console.log(req.params.carId);
             query = Booking.find({ CarID: req.params.carId }); // Corrected from req.parems.carId to req.params.carId
         } else {
-            query = Booking.find();
+            query = Booking.find().populate('User');
         }
     }
 
