@@ -18,7 +18,7 @@ exports.getProviders = async (req, res, next) => {
         queryStr=queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match=>`$${match}`);
 
         // //Finding resource
-        query = Provider.find(JSON.parse(queryStr)).populate('Bookings Cars');
+        query = Provider.find(JSON.parse(queryStr)).populate('Cars');
 
         //Select Fields\
         if(req.query.select){
@@ -77,7 +77,7 @@ exports.getProviders = async (req, res, next) => {
 exports.getProvider=async(req,res,next)=>{
 
     try {
-        const provider = await Provider.findById(req.params.id);
+        const provider = await Provider.findById(req.params.id).populate('Cars');
 
         if(!provider) {
             return res.status(400).json({success: false, msg:"There is no this provider in database"});

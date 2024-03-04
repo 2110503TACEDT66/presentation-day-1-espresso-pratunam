@@ -10,13 +10,13 @@ exports.getBookings = async (req, res, next) => {
     let query;
 
     if (req.user.role !== 'admin') {
-        query = Booking.find({ UserID: req.user.id }).populate('Cars');
+        query = Booking.find({ UserID: req.user.id });
     } else {
         if (req.params.carId) { // Corrected from req.parems.carId to req.params.carId
             console.log(req.params.carId);
-            query = Booking.find({ CarID: req.params.carId }).populate('Cars'); // Corrected from req.parems.carId to req.params.carId
+            query = Booking.find({ CarID: req.params.carId }); // Corrected from req.parems.carId to req.params.carId
         } else {
-            query = Booking.find().populate('Cars');
+            query = Booking.find();
         }
     }
 
@@ -44,10 +44,7 @@ exports.getBookings = async (req, res, next) => {
 
 exports.getBooking = async(req,res,next) => {
     try {
-        const booking = await Booking.findById(req.params.id).populate({
-            path: 'CarID',
-            select: 'name description tel'
-        });
+        const booking = await Booking.findById(req.params.id);
 
         if(!booking) {
             return res.status(404).json({

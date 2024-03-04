@@ -117,7 +117,7 @@ exports.createCar= async(req,res,next)=>{
 exports.getCar=async(req,res,next)=>{
 
     try {
-        const car = await Car.findById(req.params.id);
+        const car = await Car.findById(req.params.id).populate('Providers Bookings');
 
         if(!car) {
             return res.status(400).json({success: false, msg:"don't have this car in database"});
