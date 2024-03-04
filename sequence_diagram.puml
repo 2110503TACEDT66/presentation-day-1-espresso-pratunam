@@ -1,0 +1,136 @@
+@startuml
+
+actor User
+actor Provider
+actor Admin
+boundary AuthenticationController
+boundary CarController
+boundary BookingController
+boundary ProviderController
+database Database
+
+User -> AuthenticationController: Register (User)
+AuthenticationController -> Database: Create User
+
+
+User -> AuthenticationController: Login (User)
+AuthenticationController -> Database: Find User by Email
+Database --> AuthenticationController: User Data
+AuthenticationController --> User: Token
+
+User -> BookingController: Create Booking (User)
+BookingController -> Database: Create Booking
+Database --> BookingController: Booking Data
+BookingController --> User: Booking Created
+
+User -> BookingController: Update Booking (User)
+BookingController -> Database: Update Booking
+Database --> BookingController: Updated Booking Data
+BookingController --> User: Booking Updated
+
+User -> BookingController: Delete Booking (User)
+BookingController -> Database: Delete Booking
+BookingController --> User: Booking Deleted
+
+User -> CarController: Get All Cars (User)
+CarController -> Database: Find All Cars
+Database --> CarController: Cars Data
+CarController --> User: All Cars
+
+User -> CarController: Get Car (User)
+CarController -> Database: Find Car by ID
+Database --> CarController: Car Data
+CarController --> User: One Car
+
+User -> BookingController: Get Booking (User)
+BookingController -> Database: Find Booking by Booking ID
+Database --> BookingController: User Booking Data
+BookingController --> User: User Booking
+
+User -> ProviderController: Get All Providers (User)
+ProviderController -> Database: Find All Provides
+Database --> ProviderController: Provider Data
+ProviderController --> User:  Providers
+
+User -> ProviderController: Get Provider (User)
+ProviderController -> Database: Find Provider by Provider ID
+Database --> ProviderController: Provider Data
+ProviderController --> User: One Provider
+
+User -> AuthenticationController: Logout (User)
+AuthenticationController --> User: Token Expire
+
+
+Provider -> AuthenticationController: Register (Provider)
+AuthenticationController -> Database: Create Provider
+
+Provider -> AuthenticationController: Login (Provider)
+AuthenticationController -> Database: Find Provider by Email
+Database --> AuthenticationController: Provider Data
+AuthenticationController --> Provider: Token
+
+Provider -> CarController: Create Car (Provider)
+CarController -> Database: Create Car
+Database --> CarController: Car Data
+CarController --> Provider: Car Created
+
+Provider -> CarController: Update Car (Provider)
+CarController -> Database: Update Car
+Database --> CarController: Updated Car Data
+CarController --> Provider: Car Updated
+
+Provider -> CarController: Delete Car (Provider)
+CarController -> Database: Delete Car
+CarController --> Provider: Car Deleted
+
+Provider -> ProviderController: Get All Providers (Provider)
+ProviderController -> Database: Find All Providers
+Database --> ProviderController: Provider Data
+ProviderController --> Provider: Providers
+
+Provider -> ProviderController: Get Provider (Provider)
+ProviderController -> Database: Find Provider by Provider ID
+Database --> ProviderController: Provider Data
+ProviderController --> Provider: One Provider
+
+Provider -> AuthenticationController: Logout (Provider)
+AuthenticationController -> Provider: Token Expire
+
+Admin -> AuthenticationController: Login (Admin)
+AuthenticationController -> Database: Find Admin by Email
+Database --> AuthenticationController: Admin Data
+AuthenticationController --> Admin: Token
+
+Admin -> CarController: Get All Cars (Admin)
+CarController -> Database: Find All Cars
+Database --> CarController: Cars Data
+CarController --> Admin: All Cars
+
+Admin -> CarController: Get Car (Admin)
+CarController -> Database: Find Car by ID
+Database --> CarController: Car Data
+CarController --> Admin: One Car
+
+Admin -> BookingController: Get All Bookings (Admin)
+BookingController -> Database: Find All Bookings
+Database --> BookingController: Bookings Data
+BookingController --> Admin: All Bookings
+
+Admin -> BookingController: Get Booking (Admin)
+BookingController -> Database: Find Booking by Booking ID
+Database --> BookingController: User Booking Data
+BookingController --> Admin: One Booking
+
+Admin -> ProviderController: Get All Providers (Admin)
+ProviderController -> Database: Find All Providers
+Database --> ProviderController: Providers Data
+ProviderController --> Admin: All Providers
+
+Admin -> ProviderController: Get Provider (Admin)
+ProviderController -> Database: Find Provider by Provider ID
+Database --> ProviderController: Provider Data
+ProviderController --> Admin: One Provider
+
+Admin -> AuthenticationController: Logout (Admin)
+AuthenticationController -> Admin: Token Expire
+@enduml
